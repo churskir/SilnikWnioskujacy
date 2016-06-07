@@ -2,6 +2,7 @@ package SilnikWnioskujacy;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by Radek on 2016-05-21.
@@ -13,98 +14,69 @@ public class MainWindow {
         frame.setSize(500, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel mainPanel = new JPanel(new GridLayout(2, 3));
+        JPanel mainPanel = new JPanel(new BorderLayout());
         frame.add(mainPanel);
 
-        mainPanel.add(getFactsPanel());
-        mainPanel.add(getRulesPanel());
-        mainPanel.add(getWantedPanel());
-        mainPanel.add(getRunConfPanel());
+        JPanel inputPanel = new JPanel(new BorderLayout());
+        setInput(inputPanel);
+        frame.add(inputPanel, BorderLayout.WEST);
 
-        JScrollPane runField = new JScrollPane();
-        mainPanel.add(runField);
+        ArrayList a = new ArrayList();
 
-        JScrollPane runResuktField = new JScrollPane();
-        mainPanel.add(runResuktField);
+        JList test = new JList(a.toArray());
+
+        JScrollPane output = new JScrollPane(test);
+        mainPanel.add(output, BorderLayout.CENTER);
 
         frame.setVisible(true);
     }
 
-    private static JPanel getFactsPanel() {
-        JPanel mainFactsPanel = new JPanel(new BorderLayout());
+    private static void setInput(JPanel input){
+        JPanel add = new JPanel(new BorderLayout());
+        setAdd(add);
+        input.add(add, BorderLayout.NORTH);
 
-        JPanel northPanel = new JPanel(new GridLayout(3, 1));
-        mainFactsPanel.add(northPanel, BorderLayout.NORTH);
+        JScrollPane knowledge = new JScrollPane();
+        input.add(knowledge, BorderLayout.CENTER);
 
-        JLabel label = new JLabel("Fakty");
-        northPanel.add(label);
-        JPanel buttons = new JPanel();
-        JButton addFactBut = new JButton("Dodaj");
-        buttons.add(addFactBut);
-        JButton delFactBut = new JButton("Usuń");
-        buttons.add(delFactBut);
-        northPanel.add(buttons);
-        JTextArea newFact = new JTextArea();
-        northPanel.add(newFact);
-
-        JScrollPane facts = new JScrollPane();
-        mainFactsPanel.add(facts, BorderLayout.CENTER);
-
-        return mainFactsPanel;
+        JPanel search = new JPanel(new BorderLayout());
+        setSearch(search);
+        input.add(search, BorderLayout.SOUTH);
     }
 
-    private static JPanel getRulesPanel() {
-        JPanel mainRulesPanel = new JPanel(new BorderLayout());
+    private static void setAdd(JPanel addPanel) {
+        JTextField content = new JTextField();
+        addPanel.add(content, BorderLayout.NORTH);
 
-        JPanel northPanel = new JPanel(new GridLayout(3, 1));
-        mainRulesPanel.add(northPanel, BorderLayout.NORTH);
+        ButtonGroup typeButtons = new ButtonGroup();
+        JPanel buttonsPanel = new JPanel(new GridLayout(1, 2));
+        addPanel.add(buttonsPanel, BorderLayout.CENTER);
+        JRadioButton factType = new JRadioButton("Fakt");
+        typeButtons.add(factType);
+        buttonsPanel.add(factType);
+        JRadioButton ruleType = new JRadioButton("Reguła");
+        typeButtons.add(ruleType);
+        buttonsPanel.add(ruleType);
 
-        JLabel label = new JLabel("Reguły");
-        northPanel.add(label);
-        JPanel buttons = new JPanel();
-        JButton addRuleBut = new JButton("Dodaj");
-        buttons.add(addRuleBut);
-        JButton delRuleBut = new JButton("Usuń");
-        buttons.add(delRuleBut);
-        northPanel.add(buttons);
-        JTextArea newRule = new JTextArea();
-        northPanel.add(newRule);
-
-        JScrollPane rules = new JScrollPane();
-        mainRulesPanel.add(rules, BorderLayout.CENTER);
-
-        return mainRulesPanel;
+        JButton addThing = new JButton("Dodaj");
+        addPanel.add(addThing, BorderLayout.SOUTH);
     }
 
-    private static JPanel getWantedPanel() {
-        JPanel wantedPanel = new JPanel(new GridLayout(4, 1));
+    private static void setSearch(JPanel search) {
+        JTextField wanted = new JTextField();
+        search.add(wanted, BorderLayout.NORTH);
 
-        JLabel header = new JLabel("Szukana");
-        wantedPanel.add(header);
-
-        JTextArea wanted = new JTextArea();
-        wantedPanel.add(wanted);
-
+        ButtonGroup buttons = new ButtonGroup();
+        JPanel buttonsPanel = new JPanel(new GridLayout(1, 2));
+        search.add(buttonsPanel, BorderLayout.CENTER);
         JRadioButton backwardButton = new JRadioButton("Wstecz");
-        wantedPanel.add(backwardButton);
+        buttons.add(backwardButton);
+        buttonsPanel.add(backwardButton);
         JRadioButton forwardButton = new JRadioButton("W przód");
-        wantedPanel.add(forwardButton);
+        buttons.add(forwardButton);
+        buttonsPanel.add(forwardButton);
 
-        return wantedPanel;
-    }
-
-    private static JPanel getRunConfPanel() {
-        JPanel panel = new JPanel();
-
-        JLabel header = new JLabel("Przebieg");
-        panel.add(header);
-
-        JRadioButton auto = new JRadioButton("automatyczny");
-        panel.add(auto);
-
-        JRadioButton manual = new JRadioButton("krok po kroku");
-        panel.add(manual);
-
-        return panel;
+        JButton startButton = new JButton("Start");
+        search.add(startButton, BorderLayout.SOUTH);
     }
 }

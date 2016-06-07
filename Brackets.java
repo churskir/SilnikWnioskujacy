@@ -3,11 +3,10 @@ package SilnikWnioskujacy;
 /**
  * Created by Radek on 2016-05-24.
  */
-public class Brackets extends Equation {
-    private Equation side;
+public class Brackets extends OneArgumentOperator {
 
     @Override
     public Boolean getValue() {
-        return side.getValue();
+        return getLeft().getValue();
     }
 }

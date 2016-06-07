@@ -3,7 +3,7 @@ package SilnikWnioskujacy;
 /**
  * Created by Radek on 2016-05-17.
  */
-public class Fact {
+public class Fact{
     private String name;
     private Boolean value;
 
@@ -12,7 +12,7 @@ public class Fact {
         this.name = name;
     }
 
-    public Boolean getValue(Fact o) {
-        return o.value;
+    public Boolean getValue() {
+        return value;
     }
 }
